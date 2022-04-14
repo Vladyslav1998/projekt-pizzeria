@@ -82,7 +82,7 @@
   }
 
   const app = {
-  initMenu: function(){
+    initMenu: function(){
     const thisApp = this;
 
     console.log('thisApp.data:', thisApp.data);
