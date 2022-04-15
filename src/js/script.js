@@ -52,14 +52,15 @@
     menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML),
   };
 
-  class Product{
-    constructor(id, data){
+  class Product {
+    constructor(id, data){ // Wytłumaczyć, jak działa konstruktor
       const thisProduct = this;
 
       thisProduct.id = id;
       thisProduct.data = data;
 
-      thisProduct.renderInMenu();
+      thisProduct.renderInMenu(); //Dlaczego wyłowanie jest w tym miejscu ?
+      thisProduct.initAccordion(); // Dlaczego wyłowanie jest w tym miejscu ?
 
       console.log('new product', thisProduct);
     }
@@ -79,6 +80,28 @@
       /* add ele,ent to menu */
       menuContainer.appendChild(thisProduct.element);
     }
+    initAccordion() {
+      const thisProduct = this;
+
+      /* find the clickable trigger (the element that should react to clicking) */
+      const clickableTrigger = document.querySelector(select.menuProduct.clickable);
+
+      /* START: add event listener to clickable trigger on event click */
+      clickableTrigger.addEventListener('click', function (event) {
+        /* prevent default action for event */
+        event.preventDefault();
+        /* find active product (product that has active class) */
+        const activeProducts = document.querySelector(select.all.menuProductsActive);
+        /* if there is active product and it's not thisProduct.element, remove class active from it */
+        // activeProduct.classList.remote('active');
+        for (let activeProduct in activeProducts) { // TUTAJ SKOŃCZYŁEM !!!!!!!!!!! 
+          (activeProduct !== null && activeProduct !== thisProduct.element) ? activeProduct.classList.remove('active') : thisProduct.element;
+        }
+        /* toggle active class on thisProduct.element */
+        thisProduct.element.classList.toggle('active');
+      });
+
+    }
   }
 
   const app = {
@@ -90,14 +113,14 @@
       }
     },
 
-    initData: function(){
+    initData: function() {
       const thisApp = this;
 
       thisApp.data = dataSource;
     },
 
     init: function () {
-      const thisApp = this;                         
+      const thisApp = this;
       console.log('*** App starting ***');
       console.log('thisApp:', thisApp);
       console.log('classNames:', classNames);
