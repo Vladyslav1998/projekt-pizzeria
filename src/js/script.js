@@ -88,26 +88,31 @@
 
       /* START: add event listener to clickable trigger on event click */
       clickableTrigger.addEventListener('click', function (event) {
+
         /* prevent default action for event */
         event.preventDefault();
+
         /* find active product (product that has active class) */
         const activeProducts = document.querySelector(select.all.menuProductsActive);
+
         /* if there is active product and it's not thisProduct.element, remove class active from it */
-        // activeProduct.classList.remote('active');
-        for (let activeProduct in activeProducts) { // TUTAJ SKOŃCZYŁEM !!!!!!!!!!! 
-          (activeProduct !== null && activeProduct !== thisProduct.element) ? activeProduct.classList.remove('active') : thisProduct.element;
+        for (let activeProduct in activeProducts) { // Nie rozumiem tej tej części kodu
+          if (activeProduct !== null && activeProduct !== thisProduct.element) activeProduct.classList.remote('active');
         }
         /* toggle active class on thisProduct.element */
-        thisProduct.element.classList.toggle('active');
-      });
+        // thisProduct.element.classList.toggle('active');  // Która wersja kodu jest poprawna lub lepsza ?
+        thisProduct.element.classList.toggle(classNames.menuProduct.wrapperActive);
 
+      }); // czemu stosujemy podwójne nawiasy ???
     }
   }
 
   const app = {
     initMenu: function () {
       const thisApp = this;
+
       console.log('thisApp.data: ', thisApp.data);
+
       for (let productData in thisApp.data.products) {
         new Product(productData, thisApp.data.products[productData]);
       }
