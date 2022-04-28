@@ -53,7 +53,7 @@
   };
 
   class Product {
-    constructor(id, data){ // Wytłumaczyć, jak działa konstruktor
+    constructor(id, data) { // Wytłumaczyć, jak działa konstruktor
       const thisProduct = this;
 
       thisProduct.id = id;
@@ -96,14 +96,15 @@
         const activeProducts = document.querySelector(select.all.menuProductsActive);
 
         /* if there is active product and it's not thisProduct.element, remove class active from it */
-        for (let activeProduct in activeProducts) { // Nie rozumiem tej tej części kodu
-          if (activeProduct !== null && activeProduct !== thisProduct.element) activeProduct.classList.remote('active');
+        for (let activeProduct in activeProducts) {
+          if (activeProduct !== thisProduct.element) {
+            activeProduct.classList.remove('active');
+          }
         }
         /* toggle active class on thisProduct.element */
-        // thisProduct.element.classList.toggle('active');  // Która wersja kodu jest poprawna lub lepsza ?
-        thisProduct.element.classList.toggle(classNames.menuProduct.wrapperActive);
+        thisProduct.element.classList.toggle('active');
 
-      }); // czemu stosujemy podwójne nawiasy ???
+      });
     }
   }
 
@@ -118,7 +119,7 @@
       }
     },
 
-    initData: function() {
+    initData: function () {
       const thisApp = this;
 
       thisApp.data = dataSource;
