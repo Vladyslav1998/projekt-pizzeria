@@ -62,6 +62,8 @@
       thisProduct.renderInMenu(); //Dlaczego wyłowanie jest w tym miejscu ?
       thisProduct.getElements();
       thisProduct.initAccordion(); // Dlaczego wyłowanie jest w tym miejscu ?
+      thisProduct.initOrderForm();
+      thisProduct.processOrder();
 
       console.log('new product', thisProduct);
     }
@@ -109,11 +111,41 @@
         /* if there is active product and it's not thisProduct.element, remove class active from it */
         if (activeProduct !== null) {
           activeProduct.classList.remove('active');
-        };
+        }
         /* toggle active class on thisProduct.element */
         thisProduct.element.classList.toggle('active');
       });
     }
+
+    initOrderForm() {
+      const thisProduct = this;
+
+      console.log('initOrderForm', initOrderForm);
+
+      thisProduct.form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        thisProduct.processOrder();
+      });
+
+      for (let input of thisProduct.formInputs) {
+        input.addEventListener('change', function () {
+          thisProduct.processOrder();
+        });
+      }
+
+      thisProduct.cartButton.addEventListener('click', function (event) {
+        event.preventDefault();
+        thisProduct.processOrder();
+      });
+    }
+
+    processOrder() {
+      const thisProduct = this;
+      console.log('processOrder', processOrder);
+
+
+    }
+
   }
 
   const app = {
