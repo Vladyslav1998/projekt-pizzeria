@@ -120,7 +120,7 @@
     initOrderForm() {
       const thisProduct = this;
 
-      console.log('initOrderForm', initOrderForm);
+      console.log(initOrderForm);
 
       thisProduct.form.addEventListener('submit', function (event) {
         event.preventDefault();
@@ -141,11 +141,12 @@
 
     processOrder() {
       const thisProduct = this;
-      console.log('processOrder', processOrder);
 
+      console.log(processOrder);
 
+      const formData = utils.seriaLizeFormToObject(thisProduct.form);
+      console.log('formData', formData);
     }
-
   }
 
   const app = {
@@ -182,6 +183,7 @@
 }
 
 
-
+// Kiedy wstawiamy średnik ?
+// Czy w taki sam sposób, jak ten projekt profesjonalnie tworzą strony (data.js, functions.js, script.js) ?
 
 
