@@ -191,7 +191,10 @@
           }
         }
       }
-      // update calculated price in the HTML
+      /* multiply price by amount */
+      price *= thisProduct.amountWidget.value;
+
+      /* update calculated price in the HTML */
       thisProduct.priceElem.innerHTML = price;
     }
 
@@ -199,6 +202,9 @@
       const thisProduct = this;
 
       thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
+      thisProduct.amountWidgetElem.addEventListener('update', function(){
+        thisProduct.processOrder();
+      });
     }
   }
 
@@ -253,6 +259,13 @@
         event.preventDefault();
         thisWidget.setValue(thisWidget.value + 1);
       });
+    }
+
+    announce() {
+      const thisWidget = this;
+
+      const event = new Event('update');
+      thisWidget.element.dispatchEvent(event);
     }
   }
 
