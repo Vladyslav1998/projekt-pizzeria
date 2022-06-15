@@ -63,9 +63,8 @@
       thisProduct.getElements();
       thisProduct.initAccordion(); // Dlaczego wyłowanie jest w tym miejscu ?
       thisProduct.initOrderForm();
-      thisProduct.processOrder();
       thisProduct.initAmountWidget();
-
+      thisProduct.processOrder();
       // console.log('new product', thisProduct);
     }
 
@@ -192,7 +191,7 @@
         }
       }
       /* multiply price by amount */
-      price *= thisProduct.amountWidget.value;
+      price *=thisProduct.amountWidget.value;
 
       /* update calculated price in the HTML */
       thisProduct.priceElem.innerHTML = price;
@@ -202,7 +201,7 @@
       const thisProduct = this;
 
       thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
-      thisProduct.amountWidgetElem.addEventListener('update', function(){
+      thisProduct.amountWidgetElem.addEventListener('updated', function () {
         thisProduct.processOrder();
       });
     }
@@ -213,6 +212,7 @@
       const thisWidget = this;
 
       thisWidget.getElements(element);
+      thisWidget.setValue(thisWidget.input.value);
       thisWidget.initActions();
 
       console.log('AmountWidget:', thisWidget);
@@ -264,9 +264,10 @@
     announce() {
       const thisWidget = this;
 
-      const event = new Event('update');
+      const event = new Event('updated');
       thisWidget.element.dispatchEvent(event);
     }
+
   }
 
   const app = {
